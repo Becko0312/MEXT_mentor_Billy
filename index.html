@@ -1,293 +1,418 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEXT Scholarship Mentorship | Becko</title>
+    <title>MEXT Scholarship Mentorship - Japan</title>
     
-    <!-- Tailwind CSS for Styling -->
+    <!-- External Assets -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome for Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
 
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-        .lang-active {
-            background-color: #be123c !important;
-            color: white !important;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(226, 232, 240, 0.5);
-        }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .japan-font { font-family: 'Noto Sans JP', sans-serif; }
+        .lang-active { background-color: #be123c !important; color: white !important; }
+        .timeline-item::before { content: ''; position: absolute; left: -9px; top: 0; width: 20px; height: 20px; background: #be123c; border-radius: 50%; border: 4px solid #fff; z-index: 10; }
+        .glass-panel { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(226, 232, 240, 0.5); }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+<body class="bg-slate-50 text-slate-900">
 
     <!-- Navigation -->
     <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <i class="fa-solid fa-torii-gate text-rose-700 text-2xl"></i>
-                <span class="font-bold text-xl tracking-tight">MEXT Mentor</span>
+                <span class="font-bold text-xl tracking-tight">MEXT Mastery</span>
             </div>
-            
             <div class="flex items-center gap-4">
-                <!-- Language Switcher -->
                 <div class="flex bg-slate-100 p-1 rounded-full text-xs font-bold border border-slate-200">
-                    <button onclick="setLanguage('en')" id="lang-en" class="px-3 py-1 rounded-full transition lang-active">EN</button>
-                    <button onclick="setLanguage('mn')" id="lang-mn" class="px-3 py-1 rounded-full transition">MN</button>
+                    <button onclick="setLanguage('mn')" id="lang-mn" class="px-3 py-1 rounded-full transition lang-active">MN</button>
+                    <button onclick="setLanguage('en')" id="lang-en" class="px-3 py-1 rounded-full transition">EN</button>
                 </div>
-                <a href="#contact" class="hidden sm:block px-4 py-2 bg-rose-700 text-white text-sm font-bold rounded-full hover:bg-rose-800 transition">
-                    <span data-t="nav_contact">Contact</span>
+                <a href="#contact" class="hidden sm:block px-5 py-2 bg-rose-700 text-white text-sm font-bold rounded-full hover:bg-rose-800 transition shadow-lg shadow-rose-200">
+                    <span data-t="nav_contact">Холбоо барих</span>
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- 1. Dashboard Hub (Hero) -->
     <header class="relative bg-white pt-16 pb-24 px-4 overflow-hidden border-b border-slate-100">
-        <div class="absolute inset-0 bg-gradient-to-br from-rose-50 to-slate-50 opacity-40"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30"></div>
         <div class="max-w-5xl mx-auto text-center relative z-10">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold mb-6 border border-blue-100">
-                <i class="fa-solid fa-calendar-check"></i> <span data-t="hero_badge">2026 MEXT Scholarship Prep</span>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-bold mb-6 border border-rose-100 animate-bounce">
+                <i class="fa-solid fa-star"></i> <span data-t="hero_badge">2026 MEXT Scholarship Prep</span>
             </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">
-                <span data-t="hero_h1_1">Study in Japan with</span> <br>
-                <span class="text-rose-700" data-t="hero_h1_2">Full Government Funding</span>
+            <h1 class="text-4xl md:text-6xl font-black text-slate-900 mb-8 leading-tight tracking-tight">
+                <span data-t="hero_title">Япон Улсад 100% Тэтгэлэгтэй</span> <br>
+                <span class="text-rose-700 japan-font">学ぼう、日本で。</span>
             </h1>
-            <p class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed" data-t="hero_p">
-                Personalized mentorship from a 2015 MEXT Alumni. We specialize in helping Mongolian students successfully apply for the MEXT scholarship.
-            </p>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-                <div class="p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
-                    <div class="text-2xl font-bold text-rose-700">117k-145k</div>
-                    <div class="text-[10px] uppercase font-bold text-slate-400 tracking-widest mt-1" data-t="stat_stipend">Monthly Stipend (¥)</div>
-                </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
-                    <div class="text-2xl font-bold text-blue-700">100%</div>
-                    <div class="text-[10px] uppercase font-bold text-slate-400 tracking-widest mt-1" data-t="stat_tuition">Tuition Waiver</div>
-                </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
-                    <div class="text-2xl font-bold text-amber-600">Free</div>
-                    <div class="text-[10px] uppercase font-bold text-slate-400 tracking-widest mt-1" data-t="stat_flight">Airfare</div>
-                </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
-                    <div class="text-2xl font-bold text-slate-800">2015</div>
-                    <div class="text-[10px] uppercase font-bold text-slate-400 tracking-widest mt-1" data-t="stat_alumni">Alumni Mentor</div>
-                </div>
+            <!-- Track Switcher -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button onclick="switchTrack('undergrad')" id="btn-undergrad" class="px-8 py-4 rounded-2xl font-bold transition-all shadow-xl scale-105 bg-rose-700 text-white">
+                    <i class="fa-solid fa-graduation-cap mr-2"></i> <span data-t="track_u">Бакалавр (Undergrad)</span>
+                </button>
+                <button onclick="switchTrack('research')" id="btn-research" class="px-8 py-4 rounded-2xl font-bold transition-all bg-white border-2 border-slate-200 text-slate-500 hover:border-rose-300">
+                    <i class="fa-solid fa-microscope mr-2"></i> <span data-t="track_r">Магистр/Доктор (Research)</span>
+                </button>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <main class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-12 gap-10">
         
-        <!-- Main Content -->
-        <div class="lg:col-span-8 space-y-16">
-            
-            <!-- Resources Section -->
-            <section id="resources">
-                <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
-                    <i class="fa-solid fa-book-bookmark text-rose-700"></i>
-                    <span data-t="sec_resources">Key Resources & Links</span>
+        <!-- Left Side -->
+        <div class="lg:col-span-8 space-y-12">
+
+            <!-- 2. Eligibility Engine -->
+            <section class="glass-panel p-8 rounded-[32px] shadow-xl border border-slate-200">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <i class="fa-solid fa-id-card-clip text-rose-700"></i>
+                    <span data-t="sec_eligibility">Эрх шалгах (Eligibility Engine)</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2" data-t="label_dob">Төрсөн огноо</label>
+                        <input type="date" id="dob-input" class="w-full px-4 py-3 rounded-xl border-2 border-slate-100 focus:border-rose-500 outline-none transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2" data-t="label_edu">Боловсролын түвшин</label>
+                        <select id="edu-input" class="w-full px-4 py-3 rounded-xl border-2 border-slate-100 focus:border-rose-500 outline-none transition">
+                            <option value="hs" data-t="opt_hs">Бүрэн дунд (High School)</option>
+                            <option value="ba" data-t="opt_ba">Бакалавр (Bachelor)</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="checkEligibility()" class="w-full py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-black transition-all shadow-lg">
+                    <span data-t="btn_check">Тэнцэх эсэхээ шалгах</span>
+                </button>
+                <div id="eligibility-result" class="mt-6 hidden p-4 rounded-2xl font-bold flex items-center gap-3"></div>
+            </section>
+
+            <!-- 3. Financial Visualizer -->
+            <section class="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm">
+                <h2 class="text-2xl font-bold mb-2 tracking-tight" data-t="sec_finance">Тэтгэлгийн нийт үнэ цэнэ</h2>
+                <p class="text-sm text-slate-500 mb-8" data-t="sec_finance_p">Японы Засгийн газраас танд хөрөнгө оруулах нийт зардал (ойролцоогоор).</p>
+                <div class="h-[300px]">
+                    <canvas id="financeChart"></canvas>
+                </div>
+            </section>
+
+            <!-- 4. Path to Japan Timeline -->
+            <section class="p-4">
+                <h2 class="text-2xl font-bold mb-10 text-center" data-t="sec_timeline">Замын зураглал (2025-2026)</h2>
+                <div class="relative border-l-2 border-slate-200 ml-4 md:ml-10 space-y-12 pb-10">
+                    <div class="timeline-item relative pl-8">
+                        <div class="font-bold text-rose-700" data-t="time_1_date">2025.04 - 05 сар</div>
+                        <div class="font-bold text-lg" data-t="time_1_title">Анкет зарлагдах</div>
+                        <p class="text-sm text-slate-500" data-t="time_1_desc">Элчин сайдын яамнаас албан ёсны удирдамж гарах.</p>
+                    </div>
+                    <div class="timeline-item relative pl-8">
+                        <div class="font-bold text-rose-700" data-t="time_2_date">2025.06 сар</div>
+                        <div class="font-bold text-lg" data-t="time_2_title">Бичгийн шалгалт</div>
+                        <p class="text-sm text-slate-500" data-t="time_2_desc">Математик, Англи хэл, Байгалийн ухааны шалгалтууд.</p>
+                    </div>
+                    <div class="timeline-item relative pl-8">
+                        <div class="font-bold text-rose-700" data-t="time_3_date">2025.07 сар</div>
+                        <div class="font-bold text-lg" data-t="time_3_title">Ярилцлагын шалгалт</div>
+                        <p class="text-sm text-slate-500" data-t="time_3_desc">Элчин сайдын яамны комисстой нүүр тулсан ярилцлага.</p>
+                    </div>
+                    <div class="timeline-item relative pl-8">
+                        <div class="font-bold text-rose-700" data-t="time_4_date">2026.04 сар</div>
+                        <div class="font-bold text-lg" data-t="time_4_title">Япон руу нисэх</div>
+                        <p class="text-sm text-slate-500" data-t="time_4_desc">Сургалт эхлэх ба Япон дахь амьдралын эхлэл.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Study Resource Vault -->
+            <section class="space-y-6">
+                <h2 class="text-2xl font-bold flex items-center gap-3">
+                    <i class="fa-solid fa-vault text-rose-700"></i>
+                    <span data-t="sec_vault">Шалгалтын бэлтгэл материалууд</span>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="https://www.studyinjapan.go.jp/en/planning/scholarships/mext-scholarships/" target="_blank" class="p-6 bg-white border border-slate-200 rounded-2xl hover:border-rose-500 transition-all group shadow-sm">
-                        <div class="flex items-center gap-4 mb-3">
-                            <div class="p-3 bg-rose-50 text-rose-700 rounded-xl group-hover:bg-rose-700 group-hover:text-white transition">
-                                <i class="fa-solid fa-university"></i>
-                            </div>
-                            <span class="font-bold" data-t="link_official">Study in Japan Official</span>
+                    <a href="https://www.dnc.ac.jp/kyotsu/kakomondai/r7/r7_honshiken_mondai.html" target="_blank" class="p-6 bg-white border-2 border-slate-100 rounded-2xl hover:border-rose-500 transition shadow-sm group">
+                        <div class="text-rose-700 font-bold mb-2 flex items-center justify-between">
+                            <span>Center Exam (DNC)</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                         </div>
-                        <p class="text-xs text-slate-500" data-t="link_official_desc">Official guidelines and application forms for MEXT 2026.</p>
+                        <p class="text-xs text-slate-500" data-t="vault_dnc">Японы улсын их дээд сургуулийн элсэлтийн ерөнхий шалгалтын материалууд.</p>
                     </a>
-                    <a href="https://www.dnc.ac.jp/kyotsu/kakomon/" target="_blank" class="p-6 bg-white border border-slate-200 rounded-2xl hover:border-blue-500 transition-all group shadow-sm">
-                        <div class="flex items-center gap-4 mb-3">
-                            <div class="p-3 bg-blue-50 text-blue-700 rounded-xl group-hover:bg-blue-700 group-hover:text-white transition">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </div>
-                            <span class="font-bold" data-t="link_exams">Center Exam Past Papers</span>
+                    <a href="https://www.jasso.go.jp/en/ryugaku/eju/examinee/past_questions/index.html" target="_blank" class="p-6 bg-white border-2 border-slate-100 rounded-2xl hover:border-blue-500 transition shadow-sm group">
+                        <div class="text-blue-700 font-bold mb-2 flex items-center justify-between">
+                            <span>EJU Past Papers</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                         </div>
-                        <p class="text-xs text-slate-500" data-t="link_exams_desc">Crucial for Math, Physics, and Chemistry prep.</p>
+                        <p class="text-xs text-slate-500" data-t="vault_eju">Гадаад оюутнуудад зориулсан элсэлтийн шалгалтын материалууд.</p>
                     </a>
                 </div>
             </section>
-
-            <!-- Exam Strategy Section -->
-            <section class="bg-slate-900 text-white p-8 md:p-12 rounded-[40px] shadow-xl relative overflow-hidden">
-                <div class="relative z-10 max-w-lg">
-                    <h2 class="text-2xl font-bold mb-4" data-t="sec_exam_title">Written Exam Strategy</h2>
-                    <p class="text-slate-400 mb-8" data-t="sec_exam_desc">The MEXT written exam for undergraduates matches the level of Japanese University Entrance Exams. Focus on Math I+A/II+B, Physics, and Chemistry fundamentals.</p>
-                    <ul class="space-y-4 text-sm font-medium">
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-rose-500"></i> <span data-t="strat_1">Master "Chartman" Blue/Yellow Series for Math</span></li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-rose-500"></i> <span data-t="strat_2">Understand Japanese "Chemical Nomenclature"</span></li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-rose-500"></i> <span data-t="strat_3">Practice reading technical Japanese/English</span></li>
-                    </ul>
-                </div>
-                <i class="fa-solid fa-calculator absolute -bottom-10 -right-10 text-[200px] text-slate-800 opacity-40"></i>
-            </section>
-
         </div>
 
-        <!-- Sidebar -->
+        <!-- Right Side (Mentorship & Contact) -->
         <div class="lg:col-span-4 space-y-8">
             
-            <!-- Mentorship Form -->
-            <div class="bg-white p-8 rounded-[40px] shadow-2xl border border-slate-100 sticky top-24">
-                <h3 class="text-2xl font-bold mb-2" data-t="side_h3">Mentorship Plan</h3>
-                <p class="text-sm text-slate-500 mb-8" data-t="side_p">Select the services you need to calculate an estimate.</p>
+            <!-- 5. Mentorship & Market Analysis -->
+            <div class="bg-white p-8 rounded-[40px] shadow-2xl border border-slate-100 sticky top-20">
+                <h3 class="text-2xl font-bold mb-2" data-t="side_h3">Зөвлөх үйлчилгээ</h3>
+                <p class="text-sm text-slate-500 mb-8" data-t="side_p">Мэргэжлийн зөвлөгөө авч тэнцэх магадлалаа нэмэгдүүлээрэй.</p>
                 
                 <div class="space-y-4 mb-8">
                     <label class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl cursor-pointer hover:bg-rose-50 border border-transparent hover:border-rose-100 transition">
                         <div class="flex items-center gap-3">
                             <input type="checkbox" value="50" onchange="updateTotal()" class="service-checkbox w-5 h-5 accent-rose-700">
-                            <span class="text-sm font-semibold" data-t="srv_1">Document Review</span>
+                            <span class="text-sm font-semibold" data-t="srv_1">Бичиг баримт хянах</span>
                         </div>
                         <span class="font-bold text-rose-700">$50</span>
                     </label>
                     <label class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl cursor-pointer hover:bg-rose-50 border border-transparent hover:border-rose-100 transition">
                         <div class="flex items-center gap-3">
                             <input type="checkbox" value="100" onchange="updateTotal()" class="service-checkbox w-5 h-5 accent-rose-700">
-                            <span class="text-sm font-semibold" data-t="srv_2">Research Plan Coaching</span>
+                            <span class="text-sm font-semibold" data-t="srv_2">Судалгааны төлөвлөгөө</span>
                         </div>
                         <span class="font-bold text-rose-700">$100</span>
                     </label>
-                    <label class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl cursor-pointer hover:bg-rose-50 border border-transparent hover:border-rose-100 transition">
-                        <div class="flex items-center gap-3">
-                            <input type="checkbox" value="80" onchange="updateTotal()" class="service-checkbox w-5 h-5 accent-rose-700">
-                            <span class="text-sm font-semibold" data-t="srv_3">Mock Interview Prep</span>
-                        </div>
-                        <span class="font-bold text-rose-700">$80</span>
-                    </label>
+                </div>
+
+                <!-- Market Comparison -->
+                <div class="bg-blue-50 p-4 rounded-2xl mb-8">
+                    <div class="text-[10px] font-black text-blue-800 uppercase tracking-widest mb-2" data-t="market_label">Агентлагтай харьцуулахад</div>
+                    <div class="h-20"><canvas id="marketChart"></canvas></div>
+                    <p class="text-[10px] text-blue-600 mt-2" data-t="market_p">* Стандарт агентлаг 500$-оос эхэлдэг.</p>
                 </div>
 
                 <div class="flex justify-between items-end mb-8">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest" data-t="total_label">Estimated Total</span>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest" data-t="total_label">Таны зардал</span>
                     <span class="text-4xl font-black text-rose-700" id="total-amount">$0</span>
                 </div>
 
                 <a href="mailto:becko0312@gmail.com" class="block w-full text-center bg-rose-700 text-white font-bold py-4 rounded-2xl shadow-xl shadow-rose-200 hover:bg-rose-800 transition transform hover:-translate-y-1">
-                    <span data-t="btn_book">Book Consultation</span>
+                    <span data-t="btn_book">Зөвлөгөө авах</span>
                 </a>
 
-                <!-- Contact Info -->
-                <div id="contact" class="mt-12 pt-8 border-t border-slate-100 space-y-6">
+                <!-- Contact Details -->
+                <div id="contact" class="mt-12 pt-8 border-t border-slate-100 space-y-4">
                     <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-rose-50 text-rose-700 rounded-full flex items-center justify-center">
-                            <i class="fa-solid fa-envelope"></i>
-                        </div>
+                        <div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-500"><i class="fa-solid fa-envelope"></i></div>
                         <div>
-                            <div class="text-[10px] font-bold text-slate-400 uppercase">Email</div>
+                            <div class="text-[10px] text-slate-400 font-bold uppercase">Email</div>
                             <div class="text-sm font-bold">becko0312@gmail.com</div>
                         </div>
                     </div>
                     <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-blue-50 text-blue-700 rounded-full flex items-center justify-center">
-                            <i class="fa-solid fa-phone"></i>
-                        </div>
+                        <div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-500"><i class="fa-solid fa-phone"></i></div>
                         <div>
-                            <div class="text-[10px] font-bold text-slate-400 uppercase">Phone (MN)</div>
+                            <div class="text-[10px] text-slate-400 font-bold uppercase">Phone</div>
                             <div class="text-sm font-bold">+976 9933 3506</div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 
-    <footer class="py-16 bg-white border-t border-slate-100 text-center">
-        <p class="text-sm text-slate-400 font-medium mb-2" data-t="footer_text">Personal MEXT Mentorship for Mongolian Students.</p>
-        <p class="text-[10px] text-slate-300">&copy; 2026 MEXT Scholarship Prep. All Rights Reserved.</p>
+    <footer class="py-20 bg-white border-t border-slate-100 text-center text-slate-400">
+        <p class="text-sm font-bold mb-1">MEXT Alumnus (Class of 2015)</p>
+        <p class="text-xs">&copy; 2026 MEXT Scholarship Mentorship Program.</p>
     </footer>
 
     <script>
         const translations = {
-            en: {
-                nav_contact: "Contact",
-                hero_badge: "2026 MEXT Scholarship Prep",
-                hero_h1_1: "Study in Japan with",
-                hero_h1_2: "Full Government Funding",
-                hero_p: "Personalized mentorship from a 2015 MEXT Alumni. We specialize in helping Mongolian students successfully apply for the MEXT scholarship.",
-                stat_stipend: "Monthly Stipend (¥)",
-                stat_tuition: "Tuition Waiver",
-                stat_flight: "Airfare",
-                stat_alumni: "Alumni Mentor",
-                sec_resources: "Key Resources & Links",
-                link_official: "Study in Japan Official",
-                link_official_desc: "Official guidelines and application forms for MEXT 2026.",
-                link_exams: "Center Exam Past Papers",
-                link_exams_desc: "Crucial for Math, Physics, and Chemistry prep.",
-                sec_exam_title: "Written Exam Strategy",
-                sec_exam_desc: "The MEXT written exam for undergraduates matches the level of Japanese University Entrance Exams. Focus on Math I+A/II+B, Physics, and Chemistry fundamentals.",
-                strat_1: "Master 'Chartman' Blue/Yellow Series for Math",
-                strat_2: "Understand Japanese 'Chemical Nomenclature'",
-                strat_3: "Practice reading technical Japanese/English",
-                side_h3: "Mentorship Plan",
-                side_p: "Select the services you need to calculate an estimate.",
-                srv_1: "Document Review",
-                srv_2: "Research Plan Coaching",
-                srv_3: "Mock Interview Prep",
-                total_label: "Estimated Total",
-                btn_book: "Book Consultation",
-                footer_text: "Personal MEXT Mentorship for Mongolian Students."
-            },
             mn: {
                 nav_contact: "Холбоо барих",
-                hero_badge: "2026 оны MEXT тэтгэлгийн бэлтгэл",
-                hero_h1_1: "Япон улсын Засгийн газрын",
-                hero_h1_2: "Бүрэн тэтгэлгээр суралц",
-                hero_p: "2015 оны MEXT төгсөгчийн зүвлөгөө. Монгол оюутнуудад зориулсан тэтгэлэгт тэнцэхэд тань бид тусална.",
-                stat_stipend: "Сар бүрийн тэтгэмж (¥)",
-                stat_tuition: "Төлбөр 100% чөлөөлөлт",
-                stat_flight: "Нислэгийн тийз",
-                stat_alumni: "Төгсөгч зөвлөх",
-                sec_resources: "Хэрэгцээт холбоосууд",
-                link_official: "Study in Japan (Албан ёсны)",
-                link_official_desc: "2026 оны тэтгэлгийн удирдамж, анкет.",
-                link_exams: "Center Exam-ийн материалууд",
-                link_exams_desc: "Математик, Физик, Химийн бэлтгэлд чухал.",
-                sec_exam_title: "Бичгийн шалгалтын стратеги",
-                sec_exam_desc: "MEXT-ийн бичгийн шалгалт нь Японы их дээд сургуулийн элсэлтийн шалгалтын түвшинд байдаг. Математик, Физик, Химийн суурь дээр анхаараарай.",
-                strat_1: "Математикт 'Chartman' цэнхэр/шар цуврал ашиглах",
-                strat_2: "Японы химийн нэр томьёог ойлгох",
-                strat_3: "Мэргэжлийн Япон/Англи хэлээр уншиж дасах",
+                hero_badge: "2026 оны MEXT тэтгэлэг",
+                hero_title: "Япон Улсад 100% Тэтгэлэгтэй",
+                track_u: "Бакалавр (Undergrad)",
+                track_r: "Магистр/Доктор (Research)",
+                sec_eligibility: "Эрх шалгах (Eligibility Engine)",
+                label_dob: "Төрсөн огноо",
+                label_edu: "Боловсролын түвшин",
+                opt_hs: "Бүрэн дунд (High School)",
+                opt_ba: "Бакалавр (Bachelor)",
+                btn_check: "Тэнцэх эсэхээ шалгах",
+                sec_finance: "Тэтгэлгийн нийт үнэ цэнэ",
+                sec_finance_p: "Японы Засгийн газраас танд хөрөнгө оруулах нийт зардал (ойролцоогоор).",
+                sec_timeline: "Замын зураглал (2025-2026)",
+                time_1_date: "2025.04 - 05 сар",
+                time_1_title: "Анкет зарлагдах",
+                time_1_desc: "Элчин сайдын яамнаас албан ёсны удирдамж гарах.",
+                time_2_date: "2025.06 сар",
+                time_2_title: "Бичгийн шалгалт",
+                time_2_desc: "Математик, Англи хэл, Байгалийн ухааны шалгалтууд.",
+                time_3_date: "2025.07 сар",
+                time_3_title: "Ярилцлагын шалгалт",
+                time_3_desc: "Элчин сайдын яамны комисстой нүүр тулсан ярилцлага.",
+                time_4_date: "2026.04 сар",
+                time_4_title: "Япон руу нисэх",
+                time_4_desc: "Сургалт эхлэх ба Япон дахь амьдралын эхлэл.",
+                sec_vault: "Шалгалтын бэлтгэл материалууд",
+                vault_dnc: "Японы улсын их дээд сургуулийн элсэлтийн ерөнхий шалгалтын материалууд.",
+                vault_eju: "Гадаад оюутнуудад зориулсан элсэлтийн шалгалтын материалууд.",
                 side_h3: "Зөвлөх үйлчилгээ",
-                side_p: "Танд хэрэгтэй үйлчилгээнүүдээ сонгож үнээ тооцоорой.",
+                side_p: "Мэргэжлийн зөвлөгөө авч тэнцэх магадлалаа нэмэгдүүлээрэй.",
                 srv_1: "Бичиг баримт хянах",
-                srv_2: "Судалгааны төлөвлөгөө засах",
-                srv_3: "Ярилцлагын бэлтгэл",
-                total_label: "Нийт зардал",
-                btn_book: "Зөвлөгөө захиалах",
-                footer_text: "Монгол оюутнуудад зориулсан MEXT тэтгэлгийн зөвлөх үйлчилгээ."
+                srv_2: "Судалгааны төлөвлөгөө",
+                market_label: "Агентлагтай харьцуулахад",
+                market_p: "* Стандарт агентлаг 500$-оос эхэлдэг.",
+                total_label: "Таны зардал",
+                btn_book: "Зөвлөгөө авах"
+            },
+            en: {
+                nav_contact: "Contact",
+                hero_badge: "2026 MEXT Scholarship",
+                hero_title: "Study in Japan 100% Scholarship",
+                track_u: "Undergraduate Track",
+                track_r: "Research/Graduate Track",
+                sec_eligibility: "Eligibility Engine",
+                label_dob: "Date of Birth",
+                label_edu: "Education Level",
+                opt_hs: "High School Grad",
+                opt_ba: "Bachelor Degree",
+                btn_check: "Check Eligibility",
+                sec_finance: "Scholarship Value",
+                sec_finance_p: "Estimated total investment MEXT makes in your education.",
+                sec_timeline: "Path to Japan (2025-2026)",
+                time_1_date: "Apr-May 2025",
+                time_1_title: "Guidelines Release",
+                time_1_desc: "Official forms published by the Embassy.",
+                time_2_date: "June 2025",
+                time_2_title: "Written Exams",
+                time_2_desc: "Math, English, and Science exams at the Embassy.",
+                time_3_date: "July 2025",
+                time_3_title: "Interview Stage",
+                time_3_desc: "In-person interview with the Embassy committee.",
+                time_4_date: "April 2026",
+                time_4_title: "Arrival in Japan",
+                time_4_desc: "Semester starts and life in Japan begins.",
+                sec_vault: "Study Resource Vault",
+                vault_dnc: "Japanese National University Entrance Exam Papers.",
+                vault_eju: "Past papers for the Examination for Japanese University Admission.",
+                side_h3: "Mentorship",
+                side_p: "Professional coaching to maximize your chances.",
+                srv_1: "Document Review",
+                srv_2: "Research Coaching",
+                market_label: "Vs. Standard Agency",
+                market_p: "* Agencies typically start from $500.",
+                total_label: "Your Cost",
+                btn_book: "Book Session"
             }
         };
 
+        let currentTrack = 'undergrad';
+        let currentLang = 'mn';
+        let financeChart, marketChart;
+
         function setLanguage(lang) {
+            currentLang = lang;
             document.querySelectorAll('[data-t]').forEach(el => {
                 const key = el.getAttribute('data-t');
                 el.innerText = translations[lang][key];
             });
-            document.getElementById('lang-en').classList.toggle('lang-active', lang === 'en');
             document.getElementById('lang-mn').classList.toggle('lang-active', lang === 'mn');
+            document.getElementById('lang-en').classList.toggle('lang-active', lang === 'en');
+            updateFinanceChart();
+        }
+
+        function switchTrack(track) {
+            currentTrack = track;
+            document.getElementById('btn-undergrad').className = track === 'undergrad' 
+                ? "px-8 py-4 rounded-2xl font-bold transition-all shadow-xl scale-105 bg-rose-700 text-white" 
+                : "px-8 py-4 rounded-2xl font-bold transition-all bg-white border-2 border-slate-200 text-slate-500 hover:border-rose-300";
+            
+            document.getElementById('btn-research').className = track === 'research' 
+                ? "px-8 py-4 rounded-2xl font-bold transition-all shadow-xl scale-105 bg-rose-700 text-white" 
+                : "px-8 py-4 rounded-2xl font-bold transition-all bg-white border-2 border-slate-200 text-slate-500 hover:border-rose-300";
+            
+            updateFinanceChart();
+        }
+
+        function checkEligibility() {
+            const dob = document.getElementById('dob-input').value;
+            const res = document.getElementById('eligibility-result');
+            if (!dob) return;
+            
+            const birthDate = new Date(dob);
+            // MEXT Rule: Undergrad (Born on or after April 2, 2001) | Research (Born on or after April 2, 1991)
+            const limit = currentTrack === 'undergrad' ? new Date('2001-04-02') : new Date('1991-04-02');
+            
+            res.classList.remove('hidden');
+            if (birthDate >= limit) {
+                res.className = "mt-6 p-4 bg-green-50 text-green-800 border-2 border-green-200 rounded-2xl font-bold flex items-center gap-3";
+                res.innerHTML = `<i class="fa-solid fa-circle-check text-xl"></i> ${currentLang === 'mn' ? 'Таны нас тэнцэх боломжтой!' : 'You likely meet the age requirement!'}`;
+            } else {
+                res.className = "mt-6 p-4 bg-red-50 text-red-800 border-2 border-red-200 rounded-2xl font-bold flex items-center gap-3";
+                res.innerHTML = `<i class="fa-solid fa-circle-xmark text-xl"></i> ${currentLang === 'mn' ? 'Насны хязгаар хэтэрсэн байна.' : 'You may exceed the age limit.'}`;
+            }
         }
 
         function updateTotal() {
             let total = 0;
-            document.querySelectorAll('.service-checkbox:checked').forEach(box => {
-                total += parseInt(box.value);
-            });
+            document.querySelectorAll('.service-checkbox:checked').forEach(c => total += parseInt(c.value));
             document.getElementById('total-amount').innerText = '$' + total;
+            
+            marketChart.data.datasets[0].data[0] = total;
+            marketChart.update();
         }
+
+        function updateFinanceChart() {
+            const tuition = currentTrack === 'undergrad' ? 30000 : 45000;
+            const stipend = currentTrack === 'undergrad' ? 45000 : 70000;
+            const labels = currentLang === 'mn' ? ['Сургалтын төлбөр', 'Сар бүрийн тэтгэмж', 'Нислэг'] : ['Tuition', 'Stipend Total', 'Airfare'];
+            
+            financeChart.data.labels = labels;
+            financeChart.data.datasets[0].data = [tuition, stipend, 2500];
+            financeChart.update();
+        }
+
+        window.onload = () => {
+            const fCtx = document.getElementById('financeChart').getContext('2d');
+            financeChart = new Chart(fCtx, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'USD ($)',
+                        data: [],
+                        backgroundColor: ['#be123c', '#0f172a', '#0369a1'],
+                        borderRadius: 12
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, grid: { color: '#f1f5f9' } }, x: { grid: { display: false } } }
+                }
+            });
+
+            const mCtx = document.getElementById('marketChart').getContext('2d');
+            marketChart = new Chart(mCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['You', 'Market'],
+                    datasets: [{
+                        data: [0, 500],
+                        backgroundColor: ['#be123c', '#cbd5e1'],
+                        borderRadius: 6,
+                        barThickness: 20
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { x: { display: false }, y: { grid: { display: false } } }
+                }
+            });
+
+            setLanguage('mn');
+            switchTrack('undergrad');
+        };
     </script>
 </body>
 </html>
